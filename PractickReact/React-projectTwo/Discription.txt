@@ -1,0 +1,9 @@
+1.npx create-react-app my-app
+2.npm run build 
+
+або 
+
+yarn build
+
+
+01:10:40
