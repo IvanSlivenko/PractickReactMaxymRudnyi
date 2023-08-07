@@ -1,1 +1,13 @@
-01:15:06
+1.npx create-react-app my-app
+2.npm run build 
+
+або 
+
+yarn build
+
+
+01:10:40
+
+01:32:59
+
+ 
