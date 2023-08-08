@@ -3,7 +3,11 @@ import {Component } from 'react'
 
 import Balance from "../Balance";
 import Score from '../Score';
+// import Transaction from '../Transaction';
+import Transactions from '../Transactions';
 
+
+let id = 0;
 class App extends Component {
   constructor() {
     super();
@@ -11,6 +15,7 @@ class App extends Component {
     this.state = {
       balance: 0,
       score: 0,
+      transactions: [],
     };
 
       this.onIncrease = this.onIncrease.bind(this);
@@ -19,35 +24,21 @@ class App extends Component {
       console.log('constructor');
     }
     
-    componentDidMount() { 
-        const balance = JSON.parse(window.localStorage.getItem('balance'));
-        this.setState({
-            balance
-        })
-        console.log("componentDidMount");
+  
+
     
-    }
-
-    componentWillUnmount() { 
-        window.localStorage.setItem('balance', JSON.stringify(this.state.balance));
-        console.log("componentWillUnmount");
-    }
-
-    // shouldComponentUpdate(nextProps, nextState) { 
-    //     console.log("shouldComponentUpdate");
-
-    //     console.log(this.state);
-
-    //     // debugger
-
-    //     return nextState.balance<5;
-    // }
 
   onIncrease() {
-    this.setState({
-      balance: this.state.balance + 1,
-    });
+    this.setState((state)=>({
+      balance: state.balance + 1,
+      transactions: [{
+          label: 'increase',
+          value: 1,
+          id:++id
+        }, ...state.transactions]
+    }))
   }
+
   onIncreaseScore() {
     this.setState({
       score: this.state.score + 1,
@@ -57,17 +48,23 @@ class App extends Component {
   onDecreaseScore=()=> {
     this.setState({
       score: this.state.score - 1,
-    });
+    })
+    ;
   }
 
   onDecrease = () => {
-    this.setState({
-      balance: this.state.balance - 1,
-    });
-  };
+    this.setState((state) => ({
+      balance: state.balance + 1,
+      transactions: [{
+          label: 'decrease',
+          value: -1,
+          id:++id
+        }, ...state.transactions]
+    }))
+  }
 
     render() {
-      console.log('render');
+    
     return (
       <div>
         <Balance balance={this.state.balance} />
@@ -77,6 +74,10 @@ class App extends Component {
         <Score score={this.state.score} />
         <button onClick={this.onIncreaseScore}>Збільшити рахунок на 1</button>
         <button onClick={this.onDecreaseScore}>Зменшити рахунок на 1</button>
+        <hr />
+
+        <Transactions transactions={this.state.transactions } />
+           
       </div>
     );
   }
