@@ -5,6 +5,7 @@ import Balance from "../Balance";
 import Score from '../Score';
 // import Transaction from '../Transaction';
 import Transactions from '../Transactions';
+import Form from '../Form'
 
 
 let id = 0;
@@ -67,13 +68,10 @@ class App extends Component {
     
     return (
       <div>
+        <Form />
+        
         <Balance balance={this.state.balance} />
-        <button onClick={this.onIncrease}>Додати 1</button>
-        <button onClick={this.onDecrease}>Відняти 1</button>
-            
-        <Score score={this.state.score} />
-        <button onClick={this.onIncreaseScore}>Збільшити рахунок на 1</button>
-        <button onClick={this.onDecreaseScore}>Зменшити рахунок на 1</button>
+        
         <hr />
 
         <Transactions transactions={this.state.transactions } />
