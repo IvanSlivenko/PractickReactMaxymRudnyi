@@ -19,63 +19,37 @@ class App extends Component {
       transactions: [],
     };
 
-      this.onIncrease = this.onIncrease.bind(this);
-      this.onIncreaseScore = this.onIncreaseScore.bind(this);
+      this.onChange = this.onChange.bind(this);
+    
 
-      console.log('constructor');
-    }
+     
+  }
+  
+  onChange = (value) => { 
+debugger
+  }
     
   
 
     
 
-  onIncrease() {
-    this.setState((state)=>({
-      balance: state.balance + 1,
-      transactions: [{
-          label: 'increase',
-          value: 1,
-          id:++id
-        }, ...state.transactions]
-    }))
-  }
-
-  onIncreaseScore() {
-    this.setState({
-      score: this.state.score + 1,
-    });
-  }
-
-  onDecreaseScore=()=> {
-    this.setState({
-      score: this.state.score - 1,
-    })
-    ;
-  }
-
-  onDecrease = () => {
-    this.setState((state) => ({
-      balance: state.balance + 1,
-      transactions: [{
-          label: 'decrease',
-          value: -1,
-          id:++id
-        }, ...state.transactions]
-    }))
-  }
+ 
 
     render() {
     
     return (
       <div>
-        <Form />
-        
         <Balance balance={this.state.balance} />
-        
-        <hr />
 
-        <Transactions transactions={this.state.transactions } />
-           
+        <Form
+        onChange={this.onChange}
+        />
+
+        <hr />
+        <Transactions transactions={this.state.transactions} />
+        
+        
+
       </div>
     );
   }
