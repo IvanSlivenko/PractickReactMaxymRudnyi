@@ -1,8 +1,9 @@
-import {Component } from 'react'
+import { Component } from 'react'
+import PropTypes from 'prop-types'
 
 
 import Balance from "../Balance";
-import Score from '../Score';
+
 // import Transaction from '../Transaction';
 import Transactions from '../Transactions';
 import Form from '../Form'
@@ -26,33 +27,36 @@ class App extends Component {
   }
   
   onChange = (value) => { 
-debugger
+    this.setState((state) => ({
+      balance: state.balance + Number(value),
+      transactions: [
+        { value, label: "change", id: ++id },
+        ...state.transactions,
+      ],
+    }));
+   
+   
   }
     
+
+
+
+  render() {  
+              return (
+                        <>
+                          <Balance balance={this.state.balance} />
+                          <Form onChange={this.onChange} />
+                          <hr />
+                          <Transactions transactions={this.state.transactions} />
+                          
+                        </>
+                     );
   
+            }
+}
 
-    
-
- 
-
-    render() {
-    
-    return (
-      <div>
-        <Balance balance={this.state.balance} />
-
-        <Form
-        onChange={this.onChange}
-        />
-
-        <hr />
-        <Transactions transactions={this.state.transactions} />
-        
-        
-
-      </div>
-    );
-  }
+Form.PropTypes = {
+  onChange: PropTypes.func
 };
 
 export default App;

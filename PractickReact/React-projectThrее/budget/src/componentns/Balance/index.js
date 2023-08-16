@@ -4,7 +4,7 @@ const Balance = ({balance, children}) => {
         <div>
            
             
-            {balance}
+            Поточний баланс : {balance}
         </div>
     );
 }

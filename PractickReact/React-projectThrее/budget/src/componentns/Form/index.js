@@ -6,14 +6,15 @@ class Form extends Component {
         super();
 
         this.state = {
-            value: 0
+            value: ''
         }
     }
 
     onSubmit = (e) => { 
         e.preventDefault();
-        console.log(this.state, this.props);
-        debugger
+       
+        this.props.onChange(this.state.value);
+        
     }
 
     onChange = (e) => { 
@@ -22,19 +23,23 @@ class Form extends Component {
             value
         })
     }
+
+   
+   
     render() {
         return (
-        <form onSubmit={this.onSubmit}>
-                <input
+          <form onSubmit={this.onSubmit}>
+            <input
                     name="balance"
                     type="number"
                     placeholder="Сумма"
                     value={this.state.value}
                     onChange={this.onChange}
-                />
-        <button> Зберегти </button>
-        </form>
-      )
+                    
+            />
+            <button> Зберегти </button>
+          </form>
+        );
    
   }
 }
