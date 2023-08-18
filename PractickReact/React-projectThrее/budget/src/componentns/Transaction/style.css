@@ -1,0 +1,17 @@
+.transaction{
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    padding: 5px;
+    margin-bottom: 10px;
+    color: green ;
+    color:red ;
+
+
+    padding: 5px;
+    background: #eeeeee;
+
+    padding: 0;
+    margin: 0;
+
+}

@@ -1,62 +1,42 @@
-import { Component } from 'react'
-import PropTypes from 'prop-types'
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
+import Home from "../Home";
+import About from "../About";
+import Statistics from "../Statistics";
 
-import Balance from "../Balance";
+import { Wrapper, GlobalStyle } from "./styles";
 
-// import Transaction from '../Transaction';
-import Transactions from '../Transactions';
-import Form from '../Form'
+const App = () => {
+  return (
+    <Router>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
 
+          <li>
+            <Link to="/statistics">Statistics</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+        </ul>
+      </nav>
 
-let id = 0;
-class App extends Component {
-  constructor() {
-    super();
+      <Routes>
+        <Route exact path="/about" element={<About />} />
+        <Route path="/statistics" element={<Statistics />} />
+        <Route path="/" element={<Home />} />
+      </Routes>
 
-    this.state = {
-      balance: 0,
-      score: 0,
-      transactions: [],
-    };
-
-      this.onChange = this.onChange.bind(this);
-    
-
-     
-  }
-  
-  onChange = (value) => { 
-    this.setState((state) => ({
-      balance: state.balance + Number(value),
-      transactions: [
-        { value, label: "change", id: ++id },
-        ...state.transactions,
-      ],
-    }));
-   
-   
-  }
-    
-
-
-
-  render() {  
-              return (
-                        <>
-                          <Balance balance={this.state.balance} />
-                          <Form onChange={this.onChange} />
-                          <hr />
-                          <Transactions transactions={this.state.transactions} />
-                          
-                        </>
-                     );
-  
-            }
-}
-
-Form.PropTypes = {
-  onChange: PropTypes.func
+      <Wrapper>
+        <GlobalStyle />
+      </Wrapper>
+    </Router>
+  );
 };
 
 export default App;
+
+

@@ -1,17 +1,17 @@
+import PropTypes from "prop-types";
 import Transaction from "../Transaction";
-const Transactions = (props) => (
-  <div>
-        {
-      props.transactions.map((transaction) => (
-              
-        <Transaction key={transaction.id} transaction={transaction} />
-      
-              
-            ))
-      
-      
+
+const Transactions = ({ transactions = []}) => transactions.map((transaction) => (
+      <Transaction key={transaction.id} transaction={transaction} />
+      ))
+  
+ 
+
+
+Transactions.propTypes = {
+  transactions: PropTypes.array
 }
-  </div>
-);
+
+
 
 export default Transactions;
