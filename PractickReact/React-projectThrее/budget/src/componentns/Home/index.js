@@ -3,6 +3,8 @@ import { Component } from 'react'
 import Balance from "../Balance";
 import Transactions from '../Transactions';
 import Form from '../Form'
+import ErrorBoundary from '../ErrorBoundary';
+
 
 import { Wrapper } from "./styles";
 
@@ -42,13 +44,14 @@ class Home extends Component {
 
   render() {  
     return (
-      <Wrapper>
-        
-        <Balance balance={this.state.balance} />
-        <Form onChange={this.onChange} />
-        <hr />
-        <Transactions transactions={this.state.transactions} />
-      </Wrapper>
+      <ErrorBoundary>
+        <Wrapper>
+          <Balance balance={this.state.balance} />
+          <Form onChange={this.onChange} />
+          <hr />
+          <Transactions transactions={this.state.transactions} />
+        </Wrapper>
+      </ErrorBoundary>
     );
   
             }
@@ -58,3 +61,5 @@ class Home extends Component {
 
 
 export default Home;
+
+//  <Transactions transactions={this.state.transactions} />;

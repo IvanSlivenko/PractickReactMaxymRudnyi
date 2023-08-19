@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "../Home";
 import About from "../About";
 import Statistics from "../Statistics";
+import Galery from "../Galery";
 
 import { Wrapper, GlobalStyle } from "./styles";
 
@@ -21,6 +22,9 @@ const App = () => {
           <li>
             <Link to="/about">About</Link>
           </li>
+          <li>
+            <Link to="/galery">Galery</Link>
+          </li>
         </ul>
       </nav>
 
@@ -28,6 +32,7 @@ const App = () => {
         <Route exact path="/about" element={<About />} />
         <Route path="/statistics" element={<Statistics />} />
         <Route path="/" element={<Home />} />
+        <Route path="/galery" element={<Galery />} />
       </Routes>
 
       <Wrapper>
