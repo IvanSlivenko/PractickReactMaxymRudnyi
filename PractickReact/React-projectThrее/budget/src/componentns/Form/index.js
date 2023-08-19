@@ -1,5 +1,11 @@
 import PropTypes from "prop-types";
 import { Component } from "react";
+import { Row } from "./styles";
+import { Comment } from "./styles";
+import { Input } from "./styles";
+import { Button } from "./styles";
+import { Wrapper } from "./styles";
+
 
 class Form extends Component {
   constructor() {
@@ -7,6 +13,8 @@ class Form extends Component {
 
     this.state = {
       value: '',
+      date: new Date().toISOString().substring(0, 10),
+      comment:''
     };
   }
 
@@ -15,29 +23,50 @@ class Form extends Component {
 
       this.props.onChange(this.state.value);
       this.setState({
-          value: ''
+        value: '',
+        date: '',
+        comment:''
+        
       })
   };
 
   onChange = (e) => {
-    const { value } = e.target;
+    const { value, name } = e.target;
     this.setState({
-      value:+value
+      [name]: name === 'balance' ? +value : value
     });
   };
 
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="balance"
-          type="number"
-          placeholder="Сумма"
-          value={this.state.value}
-          onChange={this.onChange}
-        />
-        <button> Зберегти </button>
-      </form>
+      <Wrapper>
+        <form onSubmit={this.onSubmit}>
+          <Row>
+            <Input
+              name="value"
+              type="number"
+              placeholder="Сумма"
+              value={this.state.value}
+              onChange={this.onChange}
+            />
+            <Input
+              type="date"
+              name="date"
+              value={this.state.date}
+              onChange={this.onChange}
+            />
+          </Row>
+
+          <Row>
+            <Button> Зберегти </Button>
+            <Comment
+              name="comment"
+              value={this.state.comment}
+              onChange={this.onChange}
+            />
+          </Row>
+        </form>
+      </Wrapper>
     );
   }
 }
