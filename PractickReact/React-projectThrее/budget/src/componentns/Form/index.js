@@ -21,10 +21,9 @@ class Form extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-      this.props.onChange(this.state.value);
+      this.props.onChange(this.state);
       this.setState({
         value: '',
-        date: '',
         comment:''
         
       })
@@ -33,7 +32,7 @@ class Form extends Component {
   onChange = (e) => {
     const { value, name } = e.target;
     this.setState({
-      [name]: name === 'balance' ? +value : value
+      [name]: value
     });
   };
 

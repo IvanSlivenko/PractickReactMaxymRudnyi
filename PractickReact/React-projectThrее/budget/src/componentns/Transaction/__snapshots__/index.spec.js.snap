@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Transaction component shoul show 2 zeros after amount 1`] = `
+<TransactionWrapper
+  value={0}
+>
+  <TransactionsDate />
+  <Value>
+    0.00
+  </Value>
+  <Comment />
+</TransactionWrapper>
+`;
+
+exports[`Transaction component should show transaction 1`] = `
+<TransactionWrapper
+  value={0}
+>
+  <TransactionsDate />
+  <Value>
+    0.00
+  </Value>
+  <Comment />
+</TransactionWrapper>
+`;
