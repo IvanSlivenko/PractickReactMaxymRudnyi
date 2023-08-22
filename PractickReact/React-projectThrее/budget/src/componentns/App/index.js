@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import Home from "../Home";
@@ -7,8 +8,40 @@ import Galery from "../Galery";
 
 import { Wrapper, GlobalStyle } from "./styles";
 
-const App = () => {
-  return (
+import { open } from "../../utils/indexdb";
+
+class App extends React.Component{
+  constructor(props) {
+    super(props);
+
+    this.state={
+      loading: true      
+    }
+   
+}
+
+  componentDidMount() {
+   debugger
+    open().then(() => {
+      
+      this.setState(
+        {
+        loading: false
+        }
+      )
+      
+    }).catch(()=> {
+      console.error('Помилка');
+    });
+  }
+
+  render() { 
+
+    if (this.state.loading) { 
+      return <div>Loading...</div>
+    };
+
+return (
     <Router>
       <nav>
         <ul>
@@ -41,6 +74,9 @@ const App = () => {
     </Router>
   );
 };
+  };
+
+  
 
 export default App;
 

@@ -8,6 +8,8 @@ import ErrorBoundary from '../ErrorBoundary';
 
 import { Wrapper } from "./styles";
 
+import { getItems } from '../../utils/indexdb';
+
 
 let id = 0;
 class Home extends Component {
@@ -41,7 +43,14 @@ class Home extends Component {
    
   }
     
-
+  componentDidMount() { 
+  
+    getItems().then((data) => {
+      
+    }).catch((e) => { 
+     
+    })
+  }
 
 
   render() {  
