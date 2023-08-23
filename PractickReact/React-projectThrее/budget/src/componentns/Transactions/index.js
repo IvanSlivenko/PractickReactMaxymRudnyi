@@ -12,6 +12,10 @@ Transactions.propTypes = {
   transactions: PropTypes.array
 }
 
+Transactions.defaultProps = {
+  transactions: []
+}
+
 
 
 export default Transactions;

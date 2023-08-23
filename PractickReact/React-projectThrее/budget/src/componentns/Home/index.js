@@ -8,52 +8,60 @@ import ErrorBoundary from '../ErrorBoundary';
 
 import { Wrapper } from "./styles";
 
-import { getItems } from '../../utils/indexdb';
+import { getItems, addItem } from "../../utils/indexdb";
 
 
-let id = 0;
+
 class Home extends Component {
   constructor() {
     super();
 
     this.state = {
       balance: 0,
-      score: 0,
       transactions: []
     };
 
-      this.onChange = this.onChange.bind(this);
-    
+    this.onChange = this.onChange.bind(this);
+    console.log('constructor');
   }
+
+  componentDidMount() {
+    debugger
   
-  onChange = ({value, date, comment}) => { 
+    getItems().then((transactions) => {
+      this.setState({
+        transactions
+      })
+      
+    
+        })
+      .catch((e) => {
+        debugger
+      })
+  }
+
+  onChange = ({ value, date, comment }) => {
+    const transaction = {
+      value: +value,
+      comment,
+      date,
+      id: Date.now(),
+    };
+    
+
     this.setState((state) => ({
       balance: state.balance + Number(value),
-      transactions: [
-        {
-          value: +value,
-          comment,
-          date,
-          id: ++id,
-        },
-        ...state.transactions,
-      ],
+      transactions: [transaction, ...state.transactions]
     }));
-   
-   
-  }
     
-  componentDidMount() { 
-  
-    getItems().then((data) => {
-      
-    }).catch((e) => { 
-     
-    })
+   
+
+    addItem(transaction);
   }
 
+  
 
-  render() {  
+  render() {
     return (
       <ErrorBoundary>
         <Wrapper>
@@ -64,8 +72,7 @@ class Home extends Component {
         </Wrapper>
       </ErrorBoundary>
     );
-  
-            }
+  }
 }
 
 
