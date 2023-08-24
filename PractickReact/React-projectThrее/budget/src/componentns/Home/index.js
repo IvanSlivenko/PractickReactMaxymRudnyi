@@ -30,24 +30,26 @@ class Home extends Component {
   
     getItems().then((transactions) => {
       this.setState({
-        transactions
-      })
-      
-    
-        })
-      .catch((e) => {
+        transactions: transactions,
+      });}).catch((e) => {
         debugger
       })
+    
+  
+  
   }
+
+
 
   onChange = ({ value, date, comment }) => {
     const transaction = {
       value: +value,
       comment,
       date,
-      id: Date.now(),
+      id: Date.now()
     };
     
+ 
 
     this.setState((state) => ({
       balance: state.balance + Number(value),
@@ -57,6 +59,7 @@ class Home extends Component {
    
 
     addItem(transaction);
+    
   }
 
   

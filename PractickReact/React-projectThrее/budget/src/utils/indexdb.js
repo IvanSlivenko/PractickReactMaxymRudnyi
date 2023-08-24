@@ -9,9 +9,7 @@ html5rocks.indexedDB.onerror = function (e) {
   console.log(e);
 };
 
-function open(id) {
-    console.log(DB_NAME);
-
+function open() {   
   return new Promise(function (resolve, reject) {
     const request = indexedDB.open(DB_NAME, DB_VERSION);
 
@@ -26,7 +24,7 @@ function open(id) {
         db.deleteObjectStore(DB_NAME);
       }
 
-      db.createObjectStore(DB_NAME, { keyPath: id });
+      db.createObjectStore(DB_NAME, { keyPath: "id"});
       
     };
 
@@ -47,7 +45,6 @@ function addItem(item) {
     const trans = db.transaction([DB_NAME], "readwrite");
     const store = trans.objectStore(DB_NAME);
     
-
   const request = store.put(item);
 
   request.onsuccess = function (e) {
@@ -75,19 +72,15 @@ function deleteItem(id) {
   };
 }
 
-function getItems() {
-    console.log("Start getItems");
-    var db = html5rocks.indexedDB.db;
-    console.log("db", db);
-    var trans = db.transaction([DB_NAME], "readwrite");
-    
-   
+function getItems() {   
   return new Promise((resolve, reject) => {
     var db = html5rocks.indexedDB.db;
+    
     if (!db) {
       reject(Error("No db"));
     }
     var trans = db.transaction([DB_NAME], "readwrite");
+    console.log("trans", trans);
     var store = trans.objectStore(DB_NAME);
 
     const getAllRequest = store.getAll();
