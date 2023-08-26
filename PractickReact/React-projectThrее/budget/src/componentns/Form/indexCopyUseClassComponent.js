@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { Component } from "react";
 import { Row } from "./styles";
 import { Comment } from "./styles";
 import { Input } from "./styles";
@@ -7,56 +7,52 @@ import { Button } from "./styles";
 import { Wrapper } from "./styles";
 
 
-const Form =(props)=> {
+class Form extends Component {
+  constructor() {
+    super();
 
-  const [form, setForm]=useState(
-    {
+    this.state = {
       value: '',
       date: new Date().toISOString().substring(0, 10),
       comment:''
-    
-    }
-  )
-  
+    };
+  }
 
-  const onSubmit = (e) => {
+  onSubmit = (e) => {
     e.preventDefault();
 
-   props.onChange(form);
-   
-    setForm({
-        ...form,
+      this.props.onChange(this.state);
+      this.setState({
         value: '',
         comment:''
         
       })
   };
 
-  const onChange = (e) => {
+  onChange = (e) => {
     const { value, name } = e.target;
-    setForm({
-      ...form,
+    this.setState({
       [name]: value
     });
   };
 
-  
+  render() {
     return (
       <Wrapper>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={this.onSubmit}>
           <Row>
             <Input
               name="value"
               type="number"
               placeholder="Сумма"
-              value={form.value}
-              onChange={onChange}
+              value={this.state.value}
+              onChange={this.onChange}
             />
             <Input
               type="date"
               name="date"
-              value={form.date}
-              onChange={onChange}
+              value={this.state.date}
+              onChange={this.onChange}
             />
           </Row>
 
@@ -64,13 +60,14 @@ const Form =(props)=> {
             <Button> Зберегти </Button>
             <Comment
               name="comment"
-              value={form.comment}
-              onChange={onChange}
+              value={this.state.comment}
+              onChange={this.onChange}
             />
           </Row>
         </form>
       </Wrapper>
-    );  
+    );
+  }
 }
 
 Form.propTypes = {

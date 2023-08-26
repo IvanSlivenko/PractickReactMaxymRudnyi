@@ -26,11 +26,11 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    debugger
+
   
     getItems().then((transactions) => {
       this.setState({
-        transactions: transactions,
+        transactions
       });}).catch((e) => {
         debugger
       })
