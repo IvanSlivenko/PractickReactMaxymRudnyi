@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../Form/styles";
 
 const Counter = () => { 
@@ -10,7 +10,18 @@ const Counter = () => {
         setTimeout(() => {
             alert(clicks);
         }, 3000);
-    }
+  }
+  
+  useEffect(() => {
+    console.log('render :', clicks);
+    document.title = `Component rendered. Clicked ${clicks} times`;
+    setStep((prevValue) => prevValue + 1);
+  }, [clicks, setStep]);
+
+  useEffect(() => {
+console.log('step :',step);
+  }, [step]);
+
 
     return (
       <div>
