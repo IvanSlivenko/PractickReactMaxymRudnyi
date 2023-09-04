@@ -34,6 +34,8 @@ const Form =(props)=> {
 
   const onChange = (e) => {
     const { value, name } = e.target;
+console.log('onchange', e);
+
     setForm({
       ...form,
       [name]: value
