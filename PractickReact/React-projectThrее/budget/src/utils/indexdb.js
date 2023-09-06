@@ -6,7 +6,7 @@ html5rocks.indexedDB = {};
 html5rocks.indexedDB.db = null;
 
 html5rocks.indexedDB.onerror = function (e) {
-  console.log(e);
+  // console.log(e);
 };
 
 function open() {   
@@ -80,7 +80,7 @@ function getItems() {
       reject(Error("No db"));
     }
     var trans = db.transaction([DB_NAME], "readwrite");
-    console.log("trans", trans);
+    // console.log("trans", trans);
     var store = trans.objectStore(DB_NAME);
 
     const getAllRequest = store.getAll();

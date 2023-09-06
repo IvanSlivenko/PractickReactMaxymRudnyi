@@ -23,7 +23,7 @@ const Home = () => {
         setTransactions(item);
       })
       .catch((e) => {
-        debugger;
+       console.error('error');
       });
   }, [setTransactions]);
 

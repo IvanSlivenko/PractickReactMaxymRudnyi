@@ -8,11 +8,9 @@ describe('Form component', () => {
 
     beforeEach(() => { 
 
-//const mockDate = new Date(1466424490000);
-        const spy = jest
-            .spyOn(global, "Date")
+        jest.spyOn(global, "Date")
             .mockImplementation(() => ({
-                toISOString: () =>  '10.10.10'
+                toISOString: () =>  '2023-01-01T11:49:29.558Z'
         }))
 
         })
@@ -66,7 +64,42 @@ describe('Form component', () => {
             form.simulate('submit', {
                 preventDefault: jest.fn()
             });
-            expect(props.onChange).toHaveBeenCalledTimes(1);
-         })
+            
+        });
+
+        it('should send form data', () => { 
+           
+            
+            let input = sut.find('Input[name="value"]').at(0);
+            input.simulate("change", {
+              target: {
+                value: "123",
+                name: "value",
+              },
+            });
+
+            input = sut.find('Comment[name="comment"]').at(0);
+            input.simulate("change", {
+              target: {
+                value: "comment value",
+                name: "comment",
+              },
+            });
+
+            sut.update();
+
+             const form = sut.fid("form");
+
+            form.simulate("submit", {
+              preventDefault: jest.fn(),
+            });
+
+            expect(props.onChange).toHaveBeenCalledWith({
+              value: "123",
+              date: '2023-01-01',
+              comment: "comment value"
+            });
+
+        })
     })
 })
