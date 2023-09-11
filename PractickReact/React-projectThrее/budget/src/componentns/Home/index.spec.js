@@ -9,9 +9,9 @@ import { getItems, addItem } from "../../utils/indexdb";
 
 jest.mock("../../utils/indexdb", () => { 
     getItems: jest.fn(),
-    addItem: jest.fn()    
+    addItem:  jest.fn()    
         
-});
+})
 
 describe('Home component', () => { 
     let sut;
@@ -54,8 +54,9 @@ describe('Home component', () => {
         });
 
         describe('when transactions are return  with error ', () => {
+            let consoleSpy;
             deforeEach(() => {
-
+                consoleSpy = jest.spyOn(console, 'error');
                 getItems.mockImplementation(() => Promise.reject('My Error'))
             });
 
@@ -70,19 +71,41 @@ describe('Home component', () => {
             
 
 
-            it('should render transactions with zero item', () => { })
-
-            
-            const { transactions } = sut.find('Transactions').at(0).props();
+            it('should render transactions with zero item', () => {
+                const { transactions } = sut.find('Transactions').at(0).props();
 
             // console.log('---', transactions);
             
             expect(transactions).toEgual([])
-        });
+             })
 
-        it('should console error rejected message', (() => {
             
+             it('should console error rejected message', (() => {
+            
+            expect(consoleSpy).toHaveBeenCalledWith('error','My Error');
         }))
+            
+            
+        
+        });
+        
+        describe('when transaction is added', () => {
 
+            it('should increase balance', () => { 
+                const { onChange } = sut.find('Form').at(0).props();
+
+                onChange({
+                    value: '1',
+                    date: '',
+                    comment: ''
+                });
+                sut.update();
+
+                const { balance } = sut.find('Balance').at(0).props();
+
+                expect(balance).toBe(1);
+            })
+         })
     })
 })
+
