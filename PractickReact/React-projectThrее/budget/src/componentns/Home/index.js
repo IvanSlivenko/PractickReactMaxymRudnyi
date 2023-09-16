@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect,useCallback } from 'react'
 
 import Balance from "../Balance";
 import Transactions from '../Transactions';
@@ -49,9 +49,12 @@ const Home = () => {
   }
 
   
-  const onDelete = (id) => {
-    setTransactions(transactions.filter((item) => item.id !== id))
-   }
+  const onDelete = useCallback(
+    (id) => {
+      setTransactions((transactions)=>transactions.filter((item) => item.id !== id));
+    },
+    [setTransactions]
+  );
 
     return (
       <ErrorBoundary>

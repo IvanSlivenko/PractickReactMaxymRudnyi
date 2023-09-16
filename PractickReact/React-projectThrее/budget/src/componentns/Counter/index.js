@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "../Form/styles";
 
 const Counter = () => { 
@@ -11,21 +11,24 @@ const Counter = () => {
             alert(clicks);
         }, 3000);
   }
+
+ 
   
   useEffect(() => {
-    console.log('render :', clicks,step);
+    console.log('render :', clicks, step);
     document.title = `Component rendered. Clicked ${clicks} times`;
     setStep((prevValue) => prevValue + 1);
   }, [clicks, setStep]);
 
   useEffect(() => {
-console.log('step :',step);
+// console.log('step :',step);
   }, [step]);
 
 
     return (
       <div>
         <div>Clicked: {clicks}</div>
+        
         <Button onClick={() => setClicks(clicks + step)}>Click + {step}</Button>
         <Button onClick={() => setClicks(clicks - step)}>
           Click - {step}{" "}
