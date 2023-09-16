@@ -7,22 +7,20 @@ import Home from ".";
 
 import { getItems, addItem } from "../../utils/indexdb";
 
-jest.mock("../../utils/indexdb", () => { 
+jest.mock('../../utils/indexdb', () => ({ 
     getItems: jest.fn(),
     addItem:  jest.fn()    
         
-})
+}))
 
 describe('Home component', () => { 
     let sut;
     let props;
 
 
-    describe('when component is mounted', () => {
-
-        
+    describe('when component is mounted', () => {       
         describe('when transactions are return  successfully ', () => {
-            deforeEach(() => {
+            beforeEach(() => {
 
                 getItems.mockImplementation(() => Promise.resolve([{ value: 1 }]))
             });
@@ -55,7 +53,7 @@ describe('Home component', () => {
 
         describe('when transactions are return  with error ', () => {
             let consoleSpy;
-            deforeEach(() => {
+            beforeEach(() => {
                 consoleSpy = jest.spyOn(console, 'error');
                 getItems.mockImplementation(() => Promise.reject('My Error'))
             });
@@ -69,12 +67,9 @@ describe('Home component', () => {
             });
 
             
-
-
-            it('should render transactions with zero item', () => {
+            it('should render transactions with zero items', () => {
                 const { transactions } = sut.find('Transactions').at(0).props();
 
-            // console.log('---', transactions);
             
             expect(transactions).toEgual([])
              })

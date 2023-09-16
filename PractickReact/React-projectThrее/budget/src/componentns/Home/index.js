@@ -49,7 +49,9 @@ const Home = () => {
   }
 
   
-
+  const onDelete = (id) => {
+    setTransactions(transactions.filter((item) => item.id !== id))
+   }
 
     return (
       <ErrorBoundary>
@@ -57,7 +59,7 @@ const Home = () => {
           <Balance balance={balance} />
           <Form onChange={onChange} />
           <hr />
-          <Transactions transactions={transactions} />
+          <Transactions transactions={transactions} onDelete={onDelete}/>
         </Wrapper>
       </ErrorBoundary>
     );

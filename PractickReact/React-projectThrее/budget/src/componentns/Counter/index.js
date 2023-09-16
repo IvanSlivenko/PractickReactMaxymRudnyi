@@ -13,7 +13,7 @@ const Counter = () => {
   }
   
   useEffect(() => {
-    console.log('render :', clicks);
+    console.log('render :', clicks,step);
     document.title = `Component rendered. Clicked ${clicks} times`;
     setStep((prevValue) => prevValue + 1);
   }, [clicks, setStep]);

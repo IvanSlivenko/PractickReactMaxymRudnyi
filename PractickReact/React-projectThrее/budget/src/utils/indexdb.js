@@ -48,7 +48,7 @@ function addItem(item) {
   const request = store.put(item);
 
   request.onsuccess = function (e) {
-    console.log("success");
+    // console.log("success");
   };
 
   request.onerror = function (e) {

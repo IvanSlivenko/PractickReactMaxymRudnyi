@@ -8,7 +8,8 @@ import Statistics from "../Statistics";
 import Galery from "../Galery";
 import Header from "../Header";
 import Counter from "../Counter";
-import CurrencyContext from "../../providers/context";
+import Settings from "../Settings";
+
 
 import { Wrapper, GlobalStyle } from "./styles";
 
@@ -46,20 +47,19 @@ class App extends React.Component {
     }
 
     return (
-      <CurrencyContext.Provider value={{ currency: 'UAH' }}>
-        <Router>
-          <Wrapper>
-            <GlobalStyle />
-            <Header />
-          </Wrapper>
-          <Routes>
-            <Route exact path="/about" element={<About />} />
-            <Route path="/statistics" element={<Statistics />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/galery" element={<Galery />} />
-          </Routes>
-        </Router>
-      </CurrencyContext.Provider>
+      <Router>
+        <Wrapper>
+          <GlobalStyle />
+          <Header />
+        </Wrapper>
+        <Routes>
+          <Route exact path="/about" element={<About />} />
+          <Route path="/statistics" element={<Statistics />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/galery" element={<Galery />} />
+        </Routes>
+      </Router>
     );
   }
 };
